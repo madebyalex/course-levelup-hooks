@@ -1,0 +1,45 @@
+import React, { useState } from 'react';
+
+const Toggle = () => {
+  const [status, setStatus] = useState(false);
+
+  function toggle() {
+    setStatus(!status);
+  }
+
+  return (
+    <div>
+      <button onClick={() => toggle()}>Toggle {status ? 'ON' : 'OFF'}</button>
+      {status && <h2>Hello!</h2>}
+    </div>
+  );
+};
+
+export default Toggle;
+
+// import React, { Component } from 'react';
+
+// export default class Refactor extends Component {
+//   state = {
+//     isToggled: false
+//   };
+
+//   toggle = () => {
+//     this.setState(state => {
+//       return { isToggled: !state.isToggled };
+//     });
+//   };
+
+//   render() {
+//     let toggleState = ' OFF';
+
+//     return (
+//       <div>
+//         <button onClick={this.toggle}>
+//           Toggle {this.state.isToggled ? 'ON' : 'OFF'}
+//         </button>
+//         {this.state.isToggled && <h2>Hello!</h2>}
+//       </div>
+//     );
+//   }
+// }
