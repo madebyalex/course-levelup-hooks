@@ -24,9 +24,25 @@ const App = () => {
         </p>
       )}
 
-      <input type='text' onChange={handleChange} value={name} />
+      <form
+        onSubmit={e => {
+          e.preventDefault();
+          submitForm(name, setName);
+        }}
+      >
+        <input type='text' onChange={handleChange} value={name} />
+
+        <button type='submit'>Submit</button>
+      </form>
     </div>
   );
 };
+
+function submitForm(value, setValue) {
+  const receiver = value !== '' ? value : 'somebody';
+
+  console.log(`Email to ${receiver} was sent!`);
+  setValue('');
+}
 
 export default App;
