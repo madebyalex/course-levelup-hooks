@@ -1,20 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Toggle from './components/Toggle';
+import { useDocumentsTitle } from './hooks/useDocumentsTitle';
 
 const App = () => {
-  const [name, setName] = useState('');
+  const [name, setName] = useDocumentsTitle('');
+  const submitBtn = useRef();
 
   function handleChange(e) {
     setName(e.target.value);
+    console.log(submitBtn.current.classList.value);
   }
-
-  useEffect(() => {
-    document.title = name;
-  });
 
   return (
     <div className='main-wrapper'>
-      <h1>Level Up Dishes</h1>
+      <h1 onClick={() => submitBtn.current.classList.add('new-fake-class')}>
+        Level Up Dishes
+      </h1>
 
       <Toggle />
 
@@ -36,7 +37,9 @@ const App = () => {
       >
         <input type='text' onChange={handleChange} value={name} />
 
-        <button type='submit'>Submit</button>
+        <button className='btn-submit' ref={submitBtn} type='submit'>
+          Submit
+        </button>
       </form>
     </div>
   );
