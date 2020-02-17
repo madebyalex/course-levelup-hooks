@@ -13,7 +13,13 @@ const App = () => {
 
   return (
     <div className='main-wrapper'>
-      <h1 onClick={() => submitBtn.current.classList.add('new-fake-class')}>
+      <h1
+        onClick={() => {
+          submitBtn.current.classList.contains('new-fake-class')
+            ? submitBtn.current.classList.remove('new-fake-class')
+            : submitBtn.current.classList.add('new-fake-class');
+        }}
+      >
         Level Up Dishes
       </h1>
 
