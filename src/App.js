@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, createContext } from 'react';
 import Toggle from './components/Toggle';
+import Counter from './components/Counter';
 import { useDocumentsTitle } from './hooks/useDocumentsTitle';
 
 export const UserContext = createContext();
@@ -31,6 +32,11 @@ const App = () => {
         </h1>
 
         <Toggle />
+
+        <br />
+        <br />
+
+        <Counter />
 
         <br />
         <br />
