@@ -1,7 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { UserContext } from '../App';
 
 const Toggle = () => {
   const [status, setStatus] = useState(false);
+  const userInfo = useContext(UserContext);
+
+  // console.log(userInfo);
+
+  if (!userInfo.user) {
+    return null;
+  }
 
   function toggle() {
     setStatus(!status);
