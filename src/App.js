@@ -1,6 +1,12 @@
-import React, { useState, useEffect, useRef, createContext } from 'react';
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  createContext,
+  useMemo
+} from 'react';
 import Toggle from './components/Toggle';
-import Counter from './components/Counter';
+// import Counter from './components/Counter';
 import { useDocumentsTitle } from './hooks/useDocumentsTitle';
 
 export const UserContext = createContext();
@@ -9,9 +15,22 @@ const App = () => {
   const [name, setName] = useDocumentsTitle('');
   const submitBtn = useRef();
 
+  const reverseWord = word => {
+    console.log('Function called:', word);
+
+    return word
+      .split('')
+      .reverse()
+      .join('');
+  };
+
+  const title = 'Level Up Dishes';
+
+  const TitleReversed = useMemo(() => reverseWord(title), [title]);
+
   function handleChange(e) {
     setName(e.target.value);
-    console.log(submitBtn.current.classList.value);
+    // console.log(submitBtn.current.classList.value);
   }
 
   return (
@@ -28,15 +47,15 @@ const App = () => {
               : submitBtn.current.classList.add('new-fake-class');
           }}
         >
-          Level Up Dishes
+          {TitleReversed}
         </h1>
 
         <Toggle />
 
-        <br />
+        {/* <br />
         <br />
 
-        <Counter />
+        <Counter /> */}
 
         <br />
         <br />
