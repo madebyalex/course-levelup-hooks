@@ -1,27 +1,27 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
+import useAbortableFetch from 'use-abortable-fetch';
 import Toggle from './components/Toggle';
 import { useDocumentsTitle } from './hooks/useDocumentsTitle';
 
 const App = () => {
   const [name, setName] = useDocumentsTitle('');
   const submitBtn = useRef();
-  const [dishes, setDishes] = useState([]);
+
+  const { data = [], loading } = useAbortableFetch(
+    'https://my-json-server.typicode.com/leveluptuts/fakeapi/dishes'
+  );
+
+  // console.log('data: ', data);
+  console.log(loading);
+  if (loading) {
+    document.title = 'Loading';
+  }
+
+  if (!data) return null;
 
   function handleChange(e) {
     setName(e.target.value);
   }
-
-  const fetchDishes = async () => {
-    const res = await fetch(
-      'https://my-json-server.typicode.com/leveluptuts/fakeapi/dishes'
-    );
-    const data = await res.json();
-    setDishes(data);
-  };
-
-  useEffect(() => {
-    fetchDishes();
-  }, []);
 
   return (
     <div className='main-wrapper'>
@@ -51,7 +51,7 @@ const App = () => {
         </button>
       </form>
 
-      {dishes.map(dish => (
+      {data.map(dish => (
         <article key={dish.name} className='dish-card dish-card--withImage'>
           <h3>{dish.name}</h3>
           <p>{dish.desc}</p>
