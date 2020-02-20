@@ -2,21 +2,21 @@ import React, { useState } from 'react';
 import DishForm from './DishForm';
 
 const Toggle = () => {
-  const [status, setStatus] = useState(false);
+  const [isToggled, setIsToggled] = useState(false);
 
   function toggle() {
-    setStatus(!status);
+    setIsToggled(!isToggled);
   }
 
   return (
     <div>
-      <button onClick={() => toggle()}>Toggle {status ? 'ON' : 'OFF'}</button>
-      <br />
-      <br />
-      <hr />
-      {/* {status && <h2>Hello!</h2>} */}
-
-      {status && <DishForm />}
+      {isToggled ? (
+        <DishForm setToggle={setIsToggled} />
+      ) : (
+        <button onClick={() => toggle()}>
+          {isToggled ? 'Close' : 'Show'} the form
+        </button>
+      )}
     </div>
   );
 };
