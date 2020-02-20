@@ -12,18 +12,16 @@ const App = () => {
   }
 
   const fetchDishes = async () => {
-    console.log('Ran!');
     const res = await fetch(
       'https://my-json-server.typicode.com/leveluptuts/fakeapi/dishes'
     );
     const data = await res.json();
     setDishes(data);
-    // console.log(data);
   };
 
   useEffect(() => {
     fetchDishes();
-  }, [name]);
+  }, []);
 
   return (
     <div className='main-wrapper'>
